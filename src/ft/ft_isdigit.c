@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dapereir <dapereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dapereir <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/22 13:48:23 by dapereir          #+#    #+#             */
-/*   Updated: 2023/02/23 11:55:01 by dapereir         ###   ########.fr       */
+/*   Created: 2022/11/08 14:16:10 by dapereir          #+#    #+#             */
+/*   Updated: 2022/11/08 14:17:43 by dapereir         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-int	main(int argc, char **argv)
+int	ft_isdigit(int c)
 {
-	t_data	data;
-
-	phi_init(&data);
-	phi_get_input(&data, argc, argv);
-	phi_create_data(&data);
-	phi_reset(&data);
-	return (EXIT_SUCCESS);
+	return (c >= '0' && c <= '9');
 }

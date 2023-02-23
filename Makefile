@@ -48,6 +48,19 @@ SRCS_DIR			=	./src
 OBJS_DIR			=	./obj
 
 SRCS_FILES			=	\
+						ft/ft_isdigit.c\
+						ft/ft_strlen.c\
+						ft/ft_putstr_fd.c\
+						ft/ft_strncmp.c\
+						ft/ft_itoa.c\
+						ft/ft_atoi.c\
+						\
+						utils/phi_init.c\
+						utils/phi_reset.c\
+						utils/phi_error_exit.c\
+						\
+						phi_get_input.c\
+						phi_init_data.c\
 						philo.c\
 
 SRCS				=	$(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
