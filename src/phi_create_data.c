@@ -16,15 +16,14 @@ static void	phi_create_forks(t_data *data)
 {
 	int	i;
 
-	data->forks = calloc(data->philo_nb, sizeof(pthread_mutex_t *));
+	data->forks = malloc(data->philo_nb * sizeof(pthread_mutex_t));
 	if (!data->forks)
-		phi_error_exit(data);
-
+		phi_error_exit(data, "malloc failed");
 	i = 0;
 	while (i < data->philo_nb)
 	{
 		if (pthread_mutex_init(&(data->forks[i]), NULL))
-			phi_error_exit(data);
+			phi_error_exit(data, "pthread_mutex_init failed");
 		i++;
 	}
 }
@@ -33,15 +32,15 @@ static void	phi_create_philos(t_data *data)
 {
 	int	i;
 
-	data->philos = calloc(data->philo_nb, sizeof(t_philo));
+	data->philos = malloc(data->philo_nb * sizeof(t_philo));
 	if (!data->philos)
-		phi_error_exit(data);
-
+		phi_error_exit(data, "malloc failed");
 	i = 0;
 	while (i < data->philo_nb)
 	{
 		data->philos[i].id = i + 1;
-		data->philos[i].left_fork = 0;
+		data->philos[i].left_fork = data->forks + i;
+		data->philos[i].right_fork = data->forks + (i + 1) % data->philo_nb;
 		i++;
 	}
 }

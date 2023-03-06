@@ -14,9 +14,8 @@
 
 void	phi_reset(t_data *data)
 {
-	data->philo_nb = -1;
-	data->die_time = -1;
-	data->eat_time = -1;
-	data->sleep_time = -1;
-	data->eat_nb = -1;
+	if (data->philos)
+		free(data->philos);
+	if (data->forks)
+		free(data->forks);
 }

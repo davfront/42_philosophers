@@ -29,7 +29,7 @@ EOC					=	\033[0m
 # COMMANDS
 
 CC					=	cc
-CFLAGS				=	-Wall -Wextra -Werror
+CFLAGS				=	-Wall -Wextra -Werror -pthread
 RM					=	rm -rf
 
 SILENTFLAG			= 	$(if $(filter s, $(MAKEFLAGS)),1,0)
@@ -61,7 +61,10 @@ SRCS_FILES			=	\
 						\
 						phi_get_input.c\
 						phi_init_data.c\
-						philo.c\
+						phi_create_data.c\
+						phi_start_threads.c\
+						\
+						main.c\
 
 SRCS				=	$(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 OBJS_FILES			=	$(SRCS_FILES:.c=.o)
