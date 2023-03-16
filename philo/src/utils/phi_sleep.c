@@ -6,7 +6,7 @@
 /*   By: dapereir <dapereir@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 15:50:18 by dapereir          #+#    #+#             */
-/*   Updated: 2023/03/16 15:54:31 by dapereir         ###   ########.fr       */
+/*   Updated: 2023/03/16 16:49:07 by dapereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 void	phi_sleep(t_data *data, int ms)
 {
-	if (data->one_died)
+	int	one_died;
+
+	pthread_mutex_lock(&(data->one_died_mutex));
+	one_died = data->one_died;
+	pthread_mutex_unlock(&(data->one_died_mutex));
+	if (one_died)
 		return ;
 	usleep(ms * 1000);
 }

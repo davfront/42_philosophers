@@ -24,11 +24,25 @@ static void	phi_reset_forks(t_data *data)
 	}
 }
 
+static void	phi_reset_philo_mutexes(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->philo_nb)
+	{
+		pthread_mutex_destroy(&(data->philos[i].last_meal_mutex));
+		pthread_mutex_destroy(&(data->philos[i].meals_mutex));
+		i++;
+	}
+}
+
 void	phi_reset(t_data *data)
 {
 	pthread_mutex_destroy(&(data->one_died_mutex));
 	pthread_mutex_destroy(&(data->print_mutex));
 	phi_reset_forks(data);
+	phi_reset_philo_mutexes(data);
 	if (data->forks)
 		free(data->forks);
 	if (data->philos)

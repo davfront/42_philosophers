@@ -16,8 +16,12 @@ int	phi_is_philo_dead(t_philo *philo)
 {
 	double	t;
 	t_data	*data;
+	int		is_dead;
 
 	data = philo->data;
 	t = phi_absolute_time();
-	return ((t - philo->last_meal) > (double)(data->die_time));
+	pthread_mutex_lock(&(philo->last_meal_mutex));
+	is_dead = (t - philo->last_meal) > (double)(data->die_time);
+	pthread_mutex_unlock(&(philo->last_meal_mutex));
+	return (is_dead);
 }

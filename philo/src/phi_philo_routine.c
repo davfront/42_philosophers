@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-static void	phi_philo_eat_sleep_think(t_philo *philo)
+static void	phi_philo_eat(t_philo *philo)
 {
 	t_data	*data;
 
@@ -25,9 +25,24 @@ static void	phi_philo_eat_sleep_think(t_philo *philo)
 	phi_sleep(data, data->eat_time);
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
+	pthread_mutex_lock(&(philo->last_meal_mutex));
 	philo->last_meal = phi_absolute_time();
+	pthread_mutex_unlock(&(philo->last_meal_mutex));
+	pthread_mutex_lock(&(philo->meals_mutex));
 	philo->meals++;
-	if (phi_is_philo_full(philo) || data->one_died)
+	pthread_mutex_unlock(&(philo->meals_mutex));
+}
+
+static void	phi_philo_sleep_think(t_philo *philo)
+{
+	t_data	*data;
+	int		one_died;
+
+	data = philo->data;
+	pthread_mutex_lock(&(data->one_died_mutex));
+	one_died = data->one_died;
+	pthread_mutex_unlock(&(data->one_died_mutex));
+	if (phi_is_philo_full(philo) || one_died)
 		return ;
 	phi_print(data, philo->id, "is sleeping");
 	phi_sleep(data, data->sleep_time);
@@ -53,7 +68,8 @@ void	*phi_philo_routine(void *void_philo)
 	i = 0;
 	while (!phi_is_philo_full(philo) && !data->one_died)
 	{
-		phi_philo_eat_sleep_think(philo);
+		phi_philo_eat(philo);
+		phi_philo_sleep_think(philo);
 		i++;
 	}
 	return (NULL);

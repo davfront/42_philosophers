@@ -25,7 +25,9 @@ typedef struct s_philo {
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	double			last_meal;
+	pthread_mutex_t	last_meal_mutex;
 	int				meals;
+	pthread_mutex_t	meals_mutex;
 	pthread_t		thread;
 	struct s_data	*data;
 }				t_philo;

@@ -43,6 +43,10 @@ static void	phi_create_philos(t_data *data)
 		data->philos[i].right_fork = data->forks + (i + 1) % data->philo_nb;
 		data->philos[i].meals = 0;
 		data->philos[i].last_meal = data->time_0;
+		if (pthread_mutex_init(&(data->philos[i].last_meal_mutex), NULL))
+			phi_error_exit(data, "pthread_mutex_init failed");
+		if (pthread_mutex_init(&(data->philos[i].meals_mutex), NULL))
+			phi_error_exit(data, "pthread_mutex_init failed");
 		data->philos[i].data = data;
 		if (pthread_create(&(data->philos[i].thread), NULL, \
 			phi_philo_routine, &(data->philos[i])))
@@ -53,8 +57,10 @@ static void	phi_create_philos(t_data *data)
 
 void	phi_create_data(t_data *data)
 {
-	pthread_mutex_init(&(data->one_died_mutex), NULL);
-	pthread_mutex_init(&(data->print_mutex), NULL);
+	if (pthread_mutex_init(&(data->one_died_mutex), NULL))
+		phi_error_exit(data, "pthread_mutex_init failed");
+	if (pthread_mutex_init(&(data->print_mutex), NULL))
+		phi_error_exit(data, "pthread_mutex_init failed");
 	data->time_0 = phi_absolute_time();
 	phi_create_forks(data);
 	phi_create_philos(data);
