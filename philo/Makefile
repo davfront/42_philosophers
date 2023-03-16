@@ -60,13 +60,15 @@ SRCS_FILES			=	\
 						utils/phi_error_exit.c\
 						utils/phi_time.c\
 						utils/phi_print.c\
+						utils/phi_sleep.c\
 						\
 						phi_get_input.c\
 						phi_is_philo_full.c\
 						phi_is_philo_dead.c\
 						phi_philo_routine.c\
 						phi_create_data.c\
-						phi_start_threads.c\
+						phi_join_threads.c\
+						phi_check_death.c\
 						\
 						main.c\
 

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phi_is_philo_full.c                                :+:      :+:    :+:   */
+/*   phi_check_death_routine.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dapereir <dapereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,24 +12,31 @@
 
 #include "philo.h"
 
-int	phi_is_philo_full(t_philo *philo)
+static void	phi_wait_for_first_death(t_data *data)
 {
-	t_data	*data;
+	int		i;
 
-	data = philo->data;
-	return (data->meals_max != -1 && philo->meals >= data->meals_max);
+	while (!phi_is_every_philo_full(data))
+	{
+		i = 0;
+		while (i < data->philo_nb)
+		{
+			if (!phi_is_philo_full(&(data->philos[i]))
+				&& phi_is_philo_dead(&(data->philos[i])))
+			{
+				phi_print(data, data->philos[i].id, "died");
+				return ;
+			}
+			i++;
+		}
+		usleep(1000);
+	}
 }
 
-int	phi_is_every_philo_full(t_data *data)
+void	phi_check_death(t_data *data)
 {
-	int	i;
-
-	i = 0;
-	while (i < data->philo_nb)
-	{
-		if (!phi_is_philo_full(&(data->philos[i])))
-			return (0);
-		i++;
-	}
-	return (1);
+	phi_wait_for_first_death(data);
+	pthread_mutex_lock(&(data->one_died_mutex));
+	data->one_died = 1;
+	pthread_mutex_unlock(&(data->one_died_mutex));
 }

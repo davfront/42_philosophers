@@ -61,14 +61,17 @@ void	phi_error_exit_if(t_data *data, char *msg, int condition);
 double	phi_absolute_time(void);
 double	phi_time(t_data *data);
 void	phi_print(t_data *data, int id, char *msg);
+void	phi_sleep(t_data *data, int ms);
 
 // philo
 void	phi_init_data(t_data *data);
 void	phi_get_input(t_data *data, int argc, char **argv);
 int		phi_is_philo_full(t_philo *philo);
+int		phi_is_every_philo_full(t_data *data);
 int		phi_is_philo_dead(t_philo *philo);
 void	*phi_philo_routine(void *void_philo);
 void	phi_create_data(t_data *data);
-void	phi_start_threads(t_data *data);
+void	phi_join_threads(t_data *data);
+void	phi_check_death(t_data *data);
 
 #endif

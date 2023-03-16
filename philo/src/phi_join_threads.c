@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phi_start_threads.c                                :+:      :+:    :+:   */
+/*   phi_join_threads.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dapereir <dapereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-void	phi_start_threads(t_data *data)
+void	phi_join_threads(t_data *data)
 {
 	int	i;
 
@@ -20,7 +20,7 @@ void	phi_start_threads(t_data *data)
 	while (i < data->philo_nb)
 	{
 		if (pthread_join(data->philos[i].thread, NULL))
-			phi_error_exit(data, "pthread_join failed");
+			phi_error_exit(data, "philo pthread_join failed");
 		i++;
 	}
 }

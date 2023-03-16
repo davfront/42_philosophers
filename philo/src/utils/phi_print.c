@@ -14,6 +14,8 @@
 
 void	phi_print(t_data *data, int id, char *msg)
 {
+	if (data->one_died)
+		return ;
 	pthread_mutex_lock(&(data->print_mutex));
 	printf("%.0f %i %s\n", phi_time(data), id, msg);
 	pthread_mutex_unlock(&(data->print_mutex));

@@ -19,7 +19,8 @@ int	main(int argc, char **argv)
 	phi_init(&data);
 	phi_get_input(&data, argc, argv);
 	phi_create_data(&data);
-	phi_start_threads(&data);
+	phi_check_death(&data);
+	phi_join_threads(&data);
 	phi_reset(&data);
 	return (EXIT_SUCCESS);
 }
