@@ -18,7 +18,9 @@ void	phi_init(t_data *data)
 	data->die_time = -1;
 	data->eat_time = -1;
 	data->sleep_time = -1;
-	data->eat_nb = -1;
+	data->meals_max = -1;
 	data->philos = NULL;
+	data->time_0 = -1;
+	data->one_died = 0;
 	data->forks = NULL;
 }

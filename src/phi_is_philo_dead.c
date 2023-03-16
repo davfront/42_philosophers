@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   phi_is_philo_dead.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dapereir <dapereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 14:52:00 by dapereir          #+#    #+#             */
-/*   Updated: 2023/02/22 16:19:06 by dapereir         ###   ########.fr       */
+/*   Created: 2022/12/22 15:05:20 by dapereir          #+#    #+#             */
+/*   Updated: 2023/03/06 13:38:43 by dapereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-size_t	ft_strlen(const char *s)
+int	phi_is_philo_dead(t_philo *philo)
 {
-	size_t	i;
+	double	t;
+	t_data	*data;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	data = philo->data;
+	t = phi_absolute_time();
+	return ((t - philo->last_meal) > (double)(data->die_time));
 }

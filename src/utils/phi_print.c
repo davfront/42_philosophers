@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   phi_print.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dapereir <dapereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 14:52:00 by dapereir          #+#    #+#             */
-/*   Updated: 2023/02/22 16:19:06 by dapereir         ###   ########.fr       */
+/*   Created: 2023/03/06 12:57:34 by dapereir          #+#    #+#             */
+/*   Updated: 2023/03/06 13:25:36 by dapereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-size_t	ft_strlen(const char *s)
+void	phi_print(t_data *data, int id, char *msg)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	pthread_mutex_lock(&(data->print_mutex));
+	printf("%.0f %i %s\n", phi_time(data), id, msg);
+	pthread_mutex_unlock(&(data->print_mutex));
 }

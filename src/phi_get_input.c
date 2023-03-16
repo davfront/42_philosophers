@@ -59,10 +59,10 @@ void	phi_get_input(t_data *data, int argc, char **argv)
 	data->eat_time = ft_atoi(argv[3]);
 	data->sleep_time = ft_atoi(argv[4]);
 	if (argc == 6)
-		data->eat_nb = ft_atoi(argv[5]);
+		data->meals_max = ft_atoi(argv[5]);
 	else
-		data->eat_nb = -1;
+		data->meals_max = -1;
 	if (data->philo_nb < 1 || data->die_time < 0 || data->eat_time < 0
-		|| data->sleep_time < 0 || (argc == 6 && data->eat_nb < 0))
+		|| data->sleep_time < 0 || (argc == 6 && data->meals_max < 0))
 		phi_error_exit(data, "Invalid arguments");
 }

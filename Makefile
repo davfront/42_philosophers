@@ -58,9 +58,13 @@ SRCS_FILES			=	\
 						utils/phi_init.c\
 						utils/phi_reset.c\
 						utils/phi_error_exit.c\
+						utils/phi_time.c\
+						utils/phi_print.c\
 						\
 						phi_get_input.c\
-						phi_init_data.c\
+						phi_is_philo_full.c\
+						phi_is_philo_dead.c\
+						phi_philo_routine.c\
 						phi_create_data.c\
 						phi_start_threads.c\
 						\
